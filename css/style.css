@@ -371,3 +371,32 @@ footer{
     transform:translateY(0);
     transition:.7s ease;
 }
+.tech-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:20px;
+}
+
+.tech-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:25px;
+    text-align:center;
+    transition:.3s;
+}
+
+.tech-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 25px rgba(25,181,255,.25);
+}
+
+.tech-card i{
+    font-size:3rem;
+    margin-bottom:12px;
+}
+
+.tech-card span{
+    display:block;
+    font-weight:600;
+}
