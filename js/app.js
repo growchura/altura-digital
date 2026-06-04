@@ -60,3 +60,9 @@ window.addEventListener("scroll", () => {
     }
 
 });
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.querySelector(".navlinks");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
