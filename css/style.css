@@ -3,6 +3,20 @@
    COLORES PRINCIPALES
    CAMBIA LOS COLORES AQUI
 ========================================== */
+.profile-pic-header{
+    width: 1px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00d4ff;
+    box-shadow: 0 0 10px rgba(0,212,255,.5);
+    transition: transform .3s ease;
+}
+
+.profile-pic-header:hover{
+    transform: scale(1.1);
+}
+
 #particles-js{
     position:fixed;
     top:0;
