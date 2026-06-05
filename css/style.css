@@ -301,17 +301,6 @@ header{
     border-radius:50px;
 }
 
-/* ==========================================
-   CONTACTO
-========================================== */
-
-.contact-box{
-    text-align:center;
-}
-
-.contact-box p{
-    margin-bottom:15px;
-}
 
 /* ==========================================
    WHATSAPP
@@ -414,3 +403,436 @@ footer{
     display:block;
     font-weight:600;
 }
+
+/* ==========================================
+   CONTACTO REDISEÑADO - VERSIÓN MEJORADA
+========================================== */
+.contact-modern {
+    background: linear-gradient(135deg, rgba(25, 181, 255, 0.1), rgba(91, 92, 255, 0.05));
+    border-radius: 40px;
+    padding: 60px 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(25, 181, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.contact-modern h2 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.contact-info-modern {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.contact-card {
+    background: var(--card);
+    padding: 20px 35px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(25, 181, 255, 0.1);
+    min-width: 220px;
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: 0 15px 30px rgba(25, 181, 255, 0.3);
+}
+
+.contact-card:hover i,
+.contact-card:hover .contact-card-content strong,
+.contact-card:hover .contact-card-content span {
+    color: white;
+}
+
+.contact-card i {
+    font-size: 2rem;
+    color: var(--primary);
+    transition: 0.3s;
+}
+
+.contact-card-content {
+    text-align: left;
+}
+
+.contact-card-content strong {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.contact-card-content span {
+    font-size: 1rem;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+/* Cita bonita */
+.contact-quote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+    padding: 20px;
+    background: rgba(25, 181, 255, 0.05);
+    border-radius: 60px;
+    flex-wrap: wrap;
+}
+
+.contact-quote i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    opacity: 0.7;
+}
+
+.contact-quote p {
+    font-size: 1.2rem;
+    font-style: italic;
+    max-width: 400px;
+    margin: 0;
+}
+
+/* Redes sociales */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    color: var(--light);
+    text-decoration: none;
+    border: 1px solid rgba(25, 181, 255, 0.2);
+}
+
+.social-icon:hover {
+    background: var(--primary);
+    transform: translateY(-5px) scale(1.1);
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-modern {
+        padding: 40px 20px;
+    }
+    
+    .contact-card {
+        padding: 15px 25px;
+        min-width: 180px;
+    }
+    
+    .contact-card i {
+        font-size: 1.5rem;
+    }
+    
+    .contact-card-content span {
+        font-size: 0.85rem;
+    }
+    
+    .contact-quote p {
+        font-size: 1rem;
+    }
+}
+
+/* ==========================================
+   PROYECTOS - VERSIÓN SUPER MEJORADA
+========================================== */
+
+/* Filtros */
+.projects-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: var(--card);
+    border: 1px solid rgba(25, 181, 255, 0.2);
+    color: var(--light);
+    padding: 10px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(25, 181, 255, 0.3);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-color: transparent;
+}
+
+/* Grid de proyectos */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+/* Tarjeta de proyecto */
+.project-card {
+    background: var(--card);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary);
+}
+
+/* Imagen del proyecto */
+.project-image {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-btn {
+    transform: translateY(0);
+}
+
+.project-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(25, 181, 255, 0.4);
+}
+
+/* Info del proyecto */
+.project-info {
+    padding: 25px;
+}
+
+.project-info h3 {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.project-info p {
+    color: var(--gray);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.project-tech span {
+    background: rgba(25, 181, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--primary);
+}
+
+.project-expand-btn {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.project-expand-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Contenido expandido */
+.project-expand {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.project-card.active .project-expand {
+    max-height: 500px;
+}
+
+.project-details {
+    padding: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-details h4 {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.project-details h4 i {
+    color: var(--primary);
+}
+
+.project-details p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.project-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.stat i {
+    color: var(--primary);
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: rgba(25, 181, 255, 0.1);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--light);
+    transition: all 0.3s;
+}
+
+.project-link:hover {
+    background: var(--primary);
+    transform: translateX(5px);
+}
+
+/* Animación de entrada */
+.project-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-image {
+        height: 200px;
+    }
+    
+    .project-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+

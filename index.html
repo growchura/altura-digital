@@ -29,6 +29,7 @@
          NAVBAR
          CAMBIAR LOGO AQUI
     ======================================== -->
+    
     <div id="particles-js"></div>
     <header>
         
@@ -38,12 +39,9 @@
                 ☰
             </button>
 
-            <div class="logo">
-
+            <div class="logo" id="logoHomeBtn">
                 <img src="img/alturadigital.png" alt="Altura Digital">
-
                 <span>ALTURA DIGITAL</span>
-
             </div>
 
             <ul class="navlinks">
@@ -58,7 +56,7 @@
 
             <div class="header-content">
                 
-                <h1>Grow</h1>
+                <h2>Grow</h2>
             </div>
 
             <button id="themeToggle">
@@ -204,9 +202,6 @@
             <span>n8n</span>
         </div> 
 
-
-
-
         <div class="tech-card">
             <i class="devicon-typescript-plain colored"></i>
             <span>TypeScript</span>
@@ -217,10 +212,6 @@
             <span>Node.js</span>
         </div>
 
-        <div class="tech-card">
-            <i class="devicon-nextjs-original"></i>
-            <span>Next.js</span>
-        </div>
 
         <div class="tech-card">
             <i class="devicon-tailwindcss-plain colored"></i>
@@ -252,15 +243,6 @@
             <span>Docker</span>
         </div>
 
-        <div class="tech-card">
-            <i class="devicon-github-original"></i>
-            <span>GitHub</span>
-        </div>
-
-        <div class="tech-card">
-            <i class="devicon-amazonwebservices-original colored"></i>
-            <span>AWS</span>
-        </div>
 
         <div class="tech-card">
             <i class="devicon-googlecloud-plain colored"></i>
@@ -302,10 +284,7 @@
             <span>Make</span>
         </div>
 
-        <div class="tech-card">
-            <i class="fas fa-cogs"></i>
-            <span>Automatización IA</span>
-        </div>
+       
 
     </div>
     </section>
@@ -313,59 +292,253 @@
     <!-- PROYECTOS -->
 
     <section id="proyectos" class="section">
-
         <h2>Proyectos Destacados</h2>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>NexusDev</h3>
-                <p>Portafolio profesional enfocado en tecnología y desarrollo.</p>
-            </div>
-
-            <div class="card">
-                <h3>Sistema Empresarial</h3>
-                <p>Gestión de inventario, clientes y ventas.</p>
-            </div>
-
-            <div class="card">
-                <h3>Automatización Inteligente</h3>
-                <p>Automatización de tareas repetitivas mediante n8n.</p>
-            </div>
-
+        <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="app">Apps</button>
+            <button class="filter-btn" data-filter="automation">Automatización</button>
         </div>
+        <div class="projects-grid" id="projectsContainer">
+            <!-- Proyecto 1 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="https://placehold.co/400x250/19b5ff/white?text=NexusDev" alt="NexusDev">
+                    <div class="project-overlay">
+                        <button class="project-btn ver-mas" data-project="1">Ver detalles</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>🚀 NexusDev</h3>
+                    <p>Portafolio profesional enfocado en tecnología y desarrollo.</p>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Tailwind</span>
+                    </div>
+                    <button class="project-expand-btn">
+                        <i class="fa-solid fa-chevron-down"></i> Ver más
+                    </button>
+                </div>
+                <div class="project-expand">
+                    <div class="project-details">
+                        <h4><i class="fa-solid fa-circle-info"></i> Detalles del Proyecto</h4>
+                        <p>NexusDev es un portafolio interactivo que muestra las habilidades y proyectos de un desarrollador full-stack. Incluye animaciones avanzadas, modo oscuro, y está optimizado para SEO.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fa-solid fa-calendar"></i>
+                                <span>2024</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-users"></i>
+                                <span>Cliente: Freelance</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-star"></i>
+                                <span>5.0 ★</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Ver código</a>
+                            <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo en vivo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Proyecto 2 -->
+            <div class="project-card" data-category="app">
+                <div class="project-image">
+                    <img src="https://placehold.co/400x250/5b5cff/white?text=Sistema+Empresarial" alt="Sistema Empresarial">
+                    <div class="project-overlay">
+                        <button class="project-btn ver-mas" data-project="2">Ver detalles</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>🏢 Sistema Empresarial</h3>
+                    <p>Gestión de inventario, clientes y ventas.</p>
+                    <div class="project-tech">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>Bootstrap</span>
+                    </div>
+                    <button class="project-expand-btn">
+                        <i class="fa-solid fa-chevron-down"></i> Ver más
+                    </button>
+                </div>
+                <div class="project-expand">
+                    <div class="project-details">
+                        <h4><i class="fa-solid fa-circle-info"></i> Detalles del Proyecto</h4>
+                        <p>Sistema ERP completo para pequeñas y medianas empresas. Incluye módulos de inventario, facturación, CRM y reportes automatizados. Panel de administración intuitivo y seguro.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fa-solid fa-calendar"></i>
+                                <span>2024</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-building"></i>
+                                <span>5 empresas activas</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-database"></i>
+                                <span>+10k registros</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Ver código</a>
+                            <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto 3 -->
+            <div class="project-card" data-category="automation">
+                <div class="project-image">
+                    <img src="https://placehold.co/400x250/e67e22/white?text=Automatización+IA" alt="Automatización Inteligente">
+                    <div class="project-overlay">
+                        <button class="project-btn ver-mas" data-project="3">Ver detalles</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>🤖 Automatización Inteligente</h3>
+                    <p>Automatización de tareas repetitivas mediante n8n.</p>
+                    <div class="project-tech">
+                        <span>n8n</span>
+                        <span>Python</span>
+                        <span>OpenAI</span>
+                    </div>
+                    <button class="project-expand-btn">
+                        <i class="fa-solid fa-chevron-down"></i> Ver más
+                    </button>
+                </div>
+                <div class="project-expand">
+                    <div class="project-details">
+                        <h4><i class="fa-solid fa-circle-info"></i> Detalles del Proyecto</h4>
+                        <p>Automatización de procesos empresariales usando n8n e inteligencia artificial. Flujos de trabajo que conectan APIs, procesan datos y envían reportes automáticos.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>Ahorro: 20h/semana</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-robot"></i>
+                                <span>+15 workflows</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <span>95% precisión</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Workflow template</a>
+                            <a href="#" class="project-link"><i class="fa-solid fa-play"></i> Ver demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto 4 - Nuevo -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="https://placehold.co/400x250/3498db/white?text=E-commerce+Moderno" alt="E-commerce">
+                    <div class="project-overlay">
+                        <button class="project-btn ver-mas" data-project="4">Ver detalles</button>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>🛒 E-commerce Moderno</h3>
+                    <p>Tienda online con pasarela de pagos y dashboard.</p>
+                    <div class="project-tech">
+                        <span>Next.js</span>
+                        <span>Stripe</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <button class="project-expand-btn">
+                        <i class="fa-solid fa-chevron-down"></i> Ver más
+                    </button>
+                </div>
+                <div class="project-expand">
+                    <div class="project-details">
+                        <h4><i class="fa-solid fa-circle-info"></i> Detalles del Proyecto</h4>
+                        <p>Plataforma e-commerce completa con carrito de compras, sistema de pagos seguro, panel de administración y seguimiento de pedidos en tiempo real.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fa-solid fa-calendar"></i>
+                                <span>2025</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-credit-card"></i>
+                                <span>Stripe + PayPal</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <span>SEO optimizado</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Frontend repo</a>
+                            <a href="#" class="project-link"><i class="fa-solid fa-cart-shopping"></i> Ver tienda</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- CONTACTO -->
 
     <section id="contacto" class="section">
-
-        <h2>Contáctanos</h2>
-        <a href="https://wa.me/59177765616" class="btn-primary">
-                WhatsApp
-        </a>
-
-        <div class="contact-box">
-
-            <p>
-                ¿Tienes una idea? Hablemos.
-            </p>
-
-           
-
-            <p>
-                growerchura64@gmail.com
-            </p>
-
-            <p>
-                La Paz, Bolivia
-            </p>
-
+        <div class="contact-modern">
+            <h2>✨ Contáctanos ✨</h2>
+            
+            <div class="contact-info-modern">
+                <div class="contact-card" id="whatsappContactBtn">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <div class="contact-card-content">
+                        <strong>WhatsApp</strong>
+                        <span>+591 77765616</span>
+                    </div>
+                </div>
+                
+                <div class="contact-card" id="emailContactBtn">
+                    <i class="fa-regular fa-envelope"></i>
+                    <div class="contact-card-content">
+                        <strong>Email</strong>
+                        <span>growerchura64@gmail.com</span>
+                    </div>
+                </div>
+                
+                <div class="contact-card" id="locationContactBtn">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div class="contact-card-content">
+                        <strong>Ubicación</strong>
+                        <span>La Paz, Bolivia</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-quote">
+                <i class="fa-solid fa-quote-left"></i>
+                <p>¿Tienes una idea? Hablemos y hagamosla realidad.</p>
+                <i class="fa-solid fa-quote-right"></i>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-icon" id="fbMock">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon" id="igMock">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon" id="linkedinMock">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-icon" id="githubMock">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
         </div>
-
-        
-
     </section>
 
     <!-- BOTON WHATSAPP -->
