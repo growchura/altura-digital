@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto & Cotización | Altura Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/contacto.css">
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="img/alturadigital.png" alt="Altura Digital" onerror="this.style.display='none'">
+      ALTURA DIGITAL
+    </a>
+    <a href="index.html" class="nav-back">← Inicio</a>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-tag">// contacto & cotización</p>
+    <h1>Hagamos tu idea<br><span>realidad</span> 🚀</h1>
+    <p>Calculá el precio de tu proyecto al instante y luego hablemos.</p>
+  </section>
+
+  <div class="main">
+
+    <!-- CALCULADORA -->
+    <div class="calc-section">
+      <div class="calc-header">
+        <div class="calc-header-icon">🧮</div>
+        <div class="calc-header-text">
+          <h2>Calculadora de Cotización</h2>
+          <p>// precio estimado al instante</p>
+        </div>
+      </div>
+      <div class="calc-body">
+
+        <!-- PASO 1: Tipo -->
+        <div class="step">
+          <div class="step-label">01 — ¿Qué necesitás?</div>
+          <div class="options-grid" id="tipoGrid">
+            <div class="opt" data-tipo="landing" data-base="800" data-max="2800" data-tiempo="5-10 días">
+              <span class="opt-icon">🏠</span>
+              <span class="opt-name">Landing Page</span>
+              <span class="opt-price">Bs. 800+</span>
+            </div>
+            <div class="opt" data-tipo="web" data-base="1500" data-max="6000" data-tiempo="2-4 semanas">
+              <span class="opt-icon">🌐</span>
+              <span class="opt-name">Web Corporativa</span>
+              <span class="opt-price">Bs. 1,500+</span>
+            </div>
+            <div class="opt" data-tipo="ecommerce" data-base="3000" data-max="12000" data-tiempo="3-5 semanas">
+              <span class="opt-icon">🛒</span>
+              <span class="opt-name">E-commerce</span>
+              <span class="opt-price">Bs. 3,000+</span>
+            </div>
+            <div class="opt" data-tipo="app" data-base="4000" data-max="15000" data-tiempo="4-8 semanas">
+              <span class="opt-icon">📱</span>
+              <span class="opt-name">App Android</span>
+              <span class="opt-price">Bs. 4,000+</span>
+            </div>
+            <div class="opt" data-tipo="sistema" data-base="5000" data-max="20000" data-tiempo="4-10 semanas">
+              <span class="opt-icon">🏢</span>
+              <span class="opt-name">Sistema ERP</span>
+              <span class="opt-price">Bs. 5,000+</span>
+            </div>
+            <div class="opt" data-tipo="auto" data-base="2000" data-max="9000" data-tiempo="1-3 semanas">
+              <span class="opt-icon">🤖</span>
+              <span class="opt-name">Automatización</span>
+              <span class="opt-price">Bs. 2,000+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 2: Complejidad -->
+        <div class="step" id="stepComplejidad" style="display:none">
+          <div class="step-label">02 — ¿Qué nivel de complejidad?</div>
+          <div class="options-grid three" id="complejidadGrid">
+            <div class="opt" data-complejidad="basico" data-mult="1">
+              <span class="opt-icon">⚡</span>
+              <span class="opt-name">Básico</span>
+              <span class="opt-price">Lo esencial</span>
+            </div>
+            <div class="opt" data-complejidad="estandar" data-mult="2">
+              <span class="opt-icon">🔥</span>
+              <span class="opt-name">Estándar</span>
+              <span class="opt-price">Lo recomendado</span>
+            </div>
+            <div class="opt" data-complejidad="premium" data-mult="3.5">
+              <span class="opt-icon">💎</span>
+              <span class="opt-name">Premium</span>
+              <span class="opt-price">Sin límites</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 3: Extras -->
+        <div class="step" id="stepExtras" style="display:none">
+          <div class="step-label">03 — ¿Qué extras querés?</div>
+          <div class="extras-grid">
+            <div class="extra" data-extra="seo" data-price="500">
+              <div class="extra-check">✓</div>
+              <div class="extra-info">
+                <div class="extra-name">🔍 SEO Optimizado</div>
+                <div class="extra-price">+Bs. 500</div>
+              </div>
+            </div>
+            <div class="extra" data-extra="mant" data-price="300">
+              <div class="extra-check">✓</div>
+              <div class="extra-info">
+                <div class="extra-name">🔧 Mantenimiento/mes</div>
+                <div class="extra-price">+Bs. 300/mes</div>
+              </div>
+            </div>
+            <div class="extra" data-extra="hosting" data-price="400">
+              <div class="extra-check">✓</div>
+              <div class="extra-info">
+                <div class="extra-name">☁️ Hosting + Dominio</div>
+                <div class="extra-price">+Bs. 400/año</div>
+              </div>
+            </div>
+            <div class="extra" data-extra="pagos" data-price="800">
+              <div class="extra-check">✓</div>
+              <div class="extra-info">
+                <div class="extra-name">💳 Integración Pagos</div>
+                <div class="extra-price">+Bs. 800</div>
+              </div>
+            </div>
+            <div class="extra" data-extra="admin" data-price="600">
+              <div class="extra-check">✓</div>
+              <div class="extra-info">
+                <div class="extra-name">⚙️ Panel Admin</div>
+                <div class="extra-price">+Bs. 600</div>
+              </div>
+            </div>
+            <div class="extra" data-extra="ia" data-price="1200">
+              <div class="extra-check">✓</div>
+              <div class="extra-info">
+                <div class="extra-name">🧠 Integración IA</div>
+                <div class="extra-price">+Bs. 1,200</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div id="resultBox">
+          <div class="result-placeholder">
+            <span class="emoji">👆</span>
+            Seleccioná un servicio para ver el precio estimado
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONTACTO -->
+    <div class="contact-section">
+
+      <div class="contact-card">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem">
+          <div class="contact-card-title">✉️ Escribinos</div>
+          <span class="available-badge"><span class="available-dot"></span> Disponible</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tu nombre</label>
+          <input type="text" class="form-input" id="nombre" placeholder="Juan Pérez" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp o Email</label>
+          <input type="text" class="form-input" id="contacto" placeholder="+591 7XXXXXXX" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tu proyecto</label>
+          <textarea class="form-textarea" id="mensaje" placeholder="Contame sobre tu idea..."></textarea>
+        </div>
+        <button class="form-submit" id="submitBtn" onclick="enviarWA()">
+          💬 Enviar por WhatsApp
+        </button>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-title">📍 También podés contactarnos</div>
+
+        <a href="https://wa.me/59177765616" target="_blank" class="contact-item">
+          <div class="contact-item-icon">💬</div>
+          <div>
+            <div class="contact-item-text">+591 77765616</div>
+            <div class="contact-item-label">WhatsApp · respuesta rápida</div>
+          </div>
+        </a>
+
+        <a href="mailto:growerchura64@gmail.com" class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div>
+            <div class="contact-item-text">growerchura64@gmail.com</div>
+            <div class="contact-item-label">Email · respuesta en 24h</div>
+          </div>
+        </a>
+
+        <div class="contact-item" style="cursor:default">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-text">La Paz, Bolivia</div>
+            <div class="contact-item-label">Atendemos todo Bolivia 🇧🇴</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/contacto.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="js/particles.js"></script>
+
+</body>
+</html>

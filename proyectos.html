@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyectos | Altura Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/proyectos.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="img/alturadigital.png" alt="Altura Digital" onerror="this.style.display='none'">
+      ALTURA DIGITAL
+    </a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-tag">// portafolio</p>
+    <h1>Proyectos que<br><span>hablan solos</span></h1>
+    <p class="hero-sub">Soluciones reales para negocios reales. Cada proyecto, una historia de transformación digital.</p>
+  </section>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+    <button class="filter-btn" data-filter="app">Apps</button>
+    <button class="filter-btn" data-filter="auto">Automatización</button>
+    <button class="filter-btn" data-filter="sistema">Sistemas</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <div class="card featured" data-category="app" style="animation-delay:0.1s"
+      data-title="🛒 K'atu Marketplace"
+      data-desc="Marketplace social para La Paz y El Alto, Bolivia. Permite comprar, vender y chatear entre usuarios con verificación de email, sistema de valoraciones, chat con fotos y ubicación GPS, y panel de administración completo."
+      data-img="https://placehold.co/800x400/1B5E20/F5B700?text=K'atu+Marketplace"
+      data-tags="React Native,FastAPI,PostgreSQL,Cloudinary,Expo"
+      data-stat1="2025" data-stat1-label="Año"
+      data-stat2="100%" data-stat2-label="Funcional"
+      data-stat3="5.0 ★" data-stat3-label="Rating"
+      data-demo="#" data-code="#">
+      <div class="card-img">
+        <img src="https://placehold.co/800x400/1B5E20/F5B700?text=K'atu+Marketplace" alt="K'atu" />
+        <div class="card-overlay"></div>
+        <span class="card-category cat-app">App</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">🛒 K'atu Marketplace</div>
+        <div class="card-desc">Marketplace social para La Paz y El Alto. Chat en tiempo real, valoraciones, fotos y GPS.</div>
+        <div class="card-tags">
+          <span class="tag">React Native</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Expo</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-stars">★★★★★</span>
+          <button class="card-btn">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-category="web" style="animation-delay:0.2s"
+      data-title="🚀 NexusDev"
+      data-desc="Portafolio profesional enfocado en tecnología y desarrollo. Incluye animaciones avanzadas, modo oscuro, y está optimizado para SEO. Diseño moderno con experiencia de usuario excepcional."
+      data-img="https://placehold.co/400x250/19b5ff/white?text=NexusDev"
+      data-tags="React,Node.js,Tailwind,SEO"
+      data-stat1="2024" data-stat1-label="Año"
+      data-stat2="Freelance" data-stat2-label="Cliente"
+      data-stat3="5.0 ★" data-stat3-label="Rating"
+      data-demo="#" data-code="#">
+      <div class="card-img">
+        <img src="https://placehold.co/400x250/19b5ff/white?text=NexusDev" alt="NexusDev" />
+        <div class="card-overlay"></div>
+        <span class="card-category cat-web">Web</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">🚀 NexusDev</div>
+        <div class="card-desc">Portafolio interactivo con animaciones avanzadas, modo oscuro y SEO optimizado.</div>
+        <div class="card-tags">
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Tailwind</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-stars">★★★★★</span>
+          <button class="card-btn">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-category="sistema" style="animation-delay:0.3s"
+      data-title="🏢 Sistema Empresarial"
+      data-desc="Sistema ERP completo para pequeñas y medianas empresas. Incluye módulos de inventario, facturación, CRM y reportes automatizados. Panel de administración intuitivo y seguro con más de 10,000 registros activos."
+      data-img="https://placehold.co/400x250/5b5cff/white?text=Sistema+Empresarial"
+      data-tags="PHP,MySQL,Bootstrap,ERP"
+      data-stat1="5" data-stat1-label="Empresas activas"
+      data-stat2="+10k" data-stat2-label="Registros"
+      data-stat3="2024" data-stat3-label="Año"
+      data-demo="#" data-code="#">
+      <div class="card-img">
+        <img src="https://placehold.co/400x250/5b5cff/white?text=Sistema+Empresarial" alt="Sistema" />
+        <div class="card-overlay"></div>
+        <span class="card-category cat-sistema">Sistema</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">🏢 Sistema Empresarial</div>
+        <div class="card-desc">ERP completo con inventario, facturación, CRM y reportes automatizados.</div>
+        <div class="card-tags">
+          <span class="tag">PHP</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Bootstrap</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-stars">★★★★★</span>
+          <button class="card-btn">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-category="auto" style="animation-delay:0.4s"
+      data-title="🤖 Automatización IA"
+      data-desc="Automatización de procesos empresariales usando n8n e inteligencia artificial. Flujos de trabajo que conectan APIs, procesan datos y envían reportes automáticos. Ahorro de 20 horas semanales para el cliente."
+      data-img="https://placehold.co/400x250/e67e22/white?text=Automatización+IA"
+      data-tags="n8n,Python,OpenAI,Zapier"
+      data-stat1="20h" data-stat1-label="Ahorro semanal"
+      data-stat2="+15" data-stat2-label="Workflows"
+      data-stat3="95%" data-stat3-label="Precisión"
+      data-demo="#" data-code="#">
+      <div class="card-img">
+        <img src="https://placehold.co/400x250/e67e22/white?text=Automatización+IA" alt="Automatización" />
+        <div class="card-overlay"></div>
+        <span class="card-category cat-auto">Automatización</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">🤖 Automatización Inteligente</div>
+        <div class="card-desc">Procesos empresariales automatizados con n8n e IA. 20h/semana ahorradas.</div>
+        <div class="card-tags">
+          <span class="tag">n8n</span>
+          <span class="tag">Python</span>
+          <span class="tag">OpenAI</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-stars">★★★★★</span>
+          <button class="card-btn">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-category="web" style="animation-delay:0.5s"
+      data-title="🛍️ E-commerce Moderno"
+      data-desc="Plataforma e-commerce completa con carrito de compras, sistema de pagos seguro con Stripe y PayPal, panel de administración y seguimiento de pedidos en tiempo real. SEO optimizado para mayor visibilidad."
+      data-img="https://placehold.co/400x250/3498db/white?text=E-commerce"
+      data-tags="Next.js,Stripe,MongoDB,PayPal"
+      data-stat1="2025" data-stat1-label="Año"
+      data-stat2="Stripe+PP" data-stat2-label="Pagos"
+      data-stat3="SEO ✓" data-stat3-label="Optimizado"
+      data-demo="#" data-code="#">
+      <div class="card-img">
+        <img src="https://placehold.co/400x250/3498db/white?text=E-commerce" alt="Ecommerce" />
+        <div class="card-overlay"></div>
+        <span class="card-category cat-web">Web</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">🛍️ E-commerce Moderno</div>
+        <div class="card-desc">Tienda online completa con Stripe, carrito y panel de administración.</div>
+        <div class="card-tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">Stripe</span>
+          <span class="tag">MongoDB</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-stars">★★★★★</span>
+          <button class="card-btn">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="cta">
+    <h2>¿Tienes un proyecto<br>en mente?</h2>
+    <p>Hablemos y hagámoslo realidad juntos.</p>
+    <a href="https://wa.me/59177765616?text=Hola%20Altura%20Digital,%20quiero%20una%20cotización" class="cta-btn">
+      💬 Cotizar ahora
+    </a>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <img src="" alt="" class="modal-img" id="modalImg" />
+      <div class="modal-body">
+        <div class="modal-header">
+          <div class="modal-title" id="modalTitle"></div>
+          <button class="modal-close" id="modalClose">✕</button>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-stats" id="modalStats"></div>
+        <div class="modal-tags" id="modalTags"></div>
+        <div class="modal-actions">
+          <a href="#" class="btn-primary" id="modalDemo">🚀 Ver demo</a>
+          <a href="#" class="btn-outline" id="modalCode">{ } Ver código</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/proyectos.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="js/particles.js"></script>
+</body>
+</html>
