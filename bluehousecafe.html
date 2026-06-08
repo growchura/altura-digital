@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Blue House Café · Restaurante de Especialidad</title>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Architects+Daughter&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* Color base cálido */
+      background-color: #faead7;
+      font-family: 'Patrick Hand', 'Architects Daughter', cursive, sans-serif;
+      color: #2e3b4e;
+      line-height: 1.5;
+      position: relative;
+      overflow-x: hidden;
+      
+      /* CAPA 1: Gradientes radiales que simulan plumas difuminadas */
+      background-image: 
+        /* Pluma clara superior izquierda */
+        radial-gradient(ellipse at 20% 30%, rgba(255,255,240,0.9) 0%, transparent 55%),
+        /* Pluma azulada inferior derecha */
+        radial-gradient(ellipse at 80% 70%, rgba(213, 228, 240, 0.8) 0%, transparent 60%),
+        /* Textura de líneas diagonales (efecto plumaje) */
+        repeating-linear-gradient(45deg, 
+          rgba(200, 180, 140, 0.15) 0px, 
+          rgba(200, 180, 140, 0.15) 2px, 
+          transparent 2px, 
+          transparent 8px
+        ),
+        /* SVG inline con formas de plumas */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.2"><path d="M45 20 Q60 5 75 15 Q90 25 80 40 Q65 55 45 40 Z" fill="%23b5c7da" /><path d="M120 70 Q140 55 150 68 Q158 82 145 90 Q128 92 120 78 Z" fill="%23e6c9a8" /><circle cx="30" cy="120" r="12" fill="%23d4b8a8" opacity="0.3"/><path d="M160 130 Q175 115 185 128 Q190 142 175 150 Z" fill="%23b8cfd0" /></svg>');
+      
+      /* Configuración de las capas */
+      background-size: 
+        cover,     /* gradiente pluma clara */
+        cover,     /* gradiente pluma azul */
+        40px 40px, /* textura líneas */
+        180px 180px; /* SVG plumas */
+      
+      /* Modos de fusión para dar profundidad 3D */
+      background-blend-mode: 
+        overlay,   /* capa clara */
+        soft-light, /* capa azul */
+        normal,    /* líneas */
+        multiply;  /* SVG plumas */
+      
+      /* Asegura que el fondo esté fijo */
+      background-attachment: fixed;
+    }
+
+    /* Pseudo-elemento para capas adicionales de plumas (Feather 3D) */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      
+      /* Capas adicionales de plumas */
+      background: 
+        /* Pluma dorada superior */
+        radial-gradient(circle at 10% 20%, rgba(255,245,215,0.4) 0%, transparent 40%),
+        /* Pluma azul inferior */
+        radial-gradient(circle at 90% 80%, rgba(190, 210, 230, 0.5) 0%, transparent 45%),
+        /* SVG con formas orgánicas de plumas */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><path d="M60 40 L80 20 L95 35 L80 55 Z" fill="%23dbe9f5" opacity="0.25"/><path d="M200 180 L225 160 L235 180 L215 200 Z" fill="%23f5e5d0" opacity="0.2"/><ellipse cx="250" cy="80" rx="30" ry="18" fill="%23c1cfd7" opacity="0.15"/></svg>');
+      
+      background-size: cover, cover, 250px 250px;
+      pointer-events: none;  /* Para que no interfiera con los clicks */
+      z-index: 0;
+      mix-blend-mode: soft-light;  /* Fusión suave */
+    }
+
+    /* Textura de cuaderno */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#d4c5a9 0.5px, transparent 0.5px);
+      background-size: 20px 20px;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .sketch-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Navegación */
+    .hand-drawn-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 3px dotted #b0c4de;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-sketch {
+      font-size: 2.4rem;
+      background: rgba(173, 216, 230, 0.4);
+      padding: 0.2rem 1.8rem;
+      border-radius: 40px 10px 40px 10px;
+      border: 2px solid #5f9ea0;
+      box-shadow: 3px 3px 0 #add8e6;
+      transform: rotate(-0.5deg);
+      color: #1e4a5f;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 1.3rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #2c3e50;
+      border-bottom: 2px dashed transparent;
+      transition: 0.2s;
+      padding: 0 4px;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      border-bottom: 2px dashed #ff7f50;
+      color: #ff7f50;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      margin: 2rem 0 5rem;
+    }
+
+    /* NUBES */
+    .clouds {
+      position: absolute;
+      top: 10px;
+      left: 10%;
+      font-size: 2.5rem;
+      opacity: 0.7;
+      animation: driftCloud 18s infinite linear;
+      z-index: 10;
+    }
+
+    .cloud2 {
+      top: 30px;
+      left: 60%;
+      animation-duration: 22s;
+      font-size: 2rem;
+    }
+
+    @keyframes driftCloud {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(30px); }
+    }
+
+    .illustration-building {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .cafe-drawing {
+      width: 100%;
+      filter: drop-shadow(6px 8px 0 rgba(173, 216, 230, 0.5));
+    }
+
+    .animated-sign {
+      font-size: 3.5rem;
+      background: #fff9e6;
+      display: inline-block;
+      padding: 0.2rem 2.5rem;
+      border: 3px solid #4682b4;
+      border-radius: 60px 15px 60px 15px;
+      margin: -1rem 0 1rem;
+      box-shadow: 5px 5px 0 #b0c4de;
+      transform: rotate(1deg);
+      animation: floatSign 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes floatSign {
+      0% { transform: rotate(0.8deg) translateY(0); }
+      100% { transform: rotate(1.2deg) translateY(-6px); }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-sketch {
+      background: #fff5e6;
+      border: 2px solid #2c3e50;
+      padding: 0.8rem 2.2rem;
+      border-radius: 30px 8px 30px 8px;
+      font-size: 1.3rem;
+      font-family: 'Patrick Hand', cursive;
+      box-shadow: 4px 4px 0 #add8e6;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      color: #2c3e50;
+      display: inline-block;
+    }
+
+    .btn-sketch:hover {
+      background: #ffecb3;
+      box-shadow: 5px 5px 0 #ff7f50;
+      transform: translate(-2px, -2px);
+    }
+
+    /* Secciones */
+    .notebook-cards {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 3rem 0;
+    }
+
+    .sketch-card {
+      flex: 1 1 250px;
+      background: #faf3e0;
+      border: 2px solid #5f9ea0;
+      border-radius: 20px 5px 20px 5px;
+      padding: 1.8rem;
+      box-shadow: 6px 6px 0 #c0d6e4;
+      background-image: linear-gradient(#e6dec8 1px, transparent 1px);
+      background-size: 100% 28px;
+    }
+
+    .real-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 15px 3px 15px 3px;
+      border: 2px solid #5f9ea0;
+      margin: 1rem 0;
+    }
+
+    /* Menú */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .dish-card {
+      background: #ffffffdb;
+      border: 2px solid #4682b4;
+      border-radius: 30px 8px 30px 8px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(2px);
+      box-shadow: 3px 3px 0 #add8e6;
+      cursor: pointer;
+    }
+
+    .dish-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 7px 7px 0 #ff7f50;
+      border-color: #ff7f50;
+    }
+
+    .dish-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 20px 5px 20px 5px;
+      margin-bottom: 1rem;
+    }
+
+    /* Galería */
+    .gallery-wall {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .polaroid-sketch {
+      background: #fcf5e8;
+      border: 2px solid #5f9ea0;
+      padding: 10px 10px 25px;
+      box-shadow: 4px 4px 0 #b0c4de;
+      transform: rotate(-1deg);
+      width: 220px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .polaroid-sketch:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 8px 8px 0 #ff7f50;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px 2px 10px 2px;
+    }
+
+    /* Formulario */
+    .notebook-form {
+      background: #fdf8ed;
+      background-image: repeating-linear-gradient(#d4cdb5 0px, #d4cdb5 1px, transparent 1px, transparent 28px);
+      border: 2px solid #5f9ea0;
+      padding: 2rem;
+      border-radius: 15px 5px 15px 5px;
+    }
+
+    .irregular-input {
+      background: transparent;
+      border: 2px solid #2c3e50;
+      border-radius: 25px 5px 25px 5px;
+      padding: 0.7rem;
+      font-family: 'Patrick Hand', cursive;
+      width: 100%;
+      margin: 0.8rem 0;
+    }
+
+    /* Notas */
+    .sticky-notes {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .sticky {
+      background: #fffacd;
+      border: 1px solid #daa520;
+      padding: 1.2rem;
+      transform: rotate(1deg);
+      box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+      width: 250px;
+    }
+
+    /* Footer */
+    .footer-sketch {
+      margin-top: 4rem;
+      border-top: 3px dotted #7f8c8d;
+      padding: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      max-width: 80%;
+      max-height: 80%;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      .sketch-container {
+        padding: 1rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        font-size: 1rem;
+      }
+      .animated-sign {
+        font-size: 2rem;
+        text-align: center;
+      }
+      .clouds {
+        font-size: 1.5rem;
+      }
+      .cloud2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sketch-container">
+    <!-- Navegación -->
+    <header class="hand-drawn-nav">
+      <div class="logo-sketch">☕ Blue House Café</div>
+      <div class="nav-links">
+        <a onclick="scrollToSection('inicio')">inicio</a>
+        <a onclick="scrollToSection('menu')">menú</a>
+        <a onclick="scrollToSection('galeria')">galería</a>
+        <a onclick="scrollToSection('reservas')">reservas</a>
+      </div>
+    </header>
+
+    <!-- Hero Section con NUBES -->
+    <section id="inicio" class="hero">
+      <div class="clouds">☁️ ☁️ ☁️</div>
+      <div class="clouds cloud2">☁️ ☁️</div>
+      
+      <div class="illustration-building">
+        <svg viewBox="0 0 500 280" class="cafe-drawing" fill="none" stroke="#2c3e50" stroke-width="2.2">
+          <rect x="80" y="60" width="340" height="190" rx="12" fill="#d9e6f2" stroke="#2c3e50" stroke-dasharray="4 2"/>
+          <rect x="110" y="90" width="60" height="50" fill="#fef9e7" stroke="#2c3e50" />
+          <rect x="310" y="90" width="60" height="50" fill="#fef9e7" stroke="#2c3e50" />
+          <rect x="180" y="120" width="140" height="100" fill="#fcf3e0" stroke="#2c3e50" stroke-dasharray="5 3"/>
+          <polygon points="70,60 250,10 430,60" fill="#b0d0e0" stroke="#2c3e50" />
+          <path d="M20 30 Q120 70 200 30" stroke="#5f9ea0" stroke-width="2" fill="none"/>
+          <circle cx="200" cy="30" r="4" fill="#ff7f50"/>
+          <circle cx="440" cy="180" r="25" fill="#98c1a0" stroke="#2c3e50" />
+          <rect x="435" y="200" width="10" height="30" fill="#c49a6c" stroke="#2c3e50"/>
+          <text x="180" y="260" font-family="'Indie Flower'" fill="#2c3e50" font-size="14">✏️ Blue House Café</text>
+        </svg>
+      </div>
+      <div class="animated-sign">✨ Sabores que inspiran ✨</div>
+      <div class="hero-buttons">
+        <button class="btn-sketch" onclick="verMenu()">📋 Ver Menú</button>
+        <button class="btn-sketch" onclick="abrirReservas()">✍️ Reservar Mesa</button>
+      </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section>
+      <h2 style="border-left: 12px solid #ff7f50; padding-left: 1rem;">📓 nuestra historia</h2>
+      <div class="notebook-cards">
+        <div class="sketch-card">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop" alt="Café acogedor" class="real-image">
+          <p>Desde 2018 creando momentos únicos en un ambiente artístico y acogedor.</p>
+        </div>
+        <div class="sketch-card">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop" alt="Interior café" class="real-image">
+          <p><strong>🎨 Arte + Café</strong> Un espacio donde cada rincón cuenta una historia.</p>
+        </div>
+        <div class="sketch-card">
+          <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=300&fit=crop" alt="Café de especialidad" class="real-image">
+          <p>🌱 Ingredientes locales · Amor por el arte · Café de especialidad</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menú Interactivo -->
+    <section id="menu">
+      <h2>🍳 nuestro menú</h2>
+      <div style="display:flex; gap:1rem; margin:1rem 0; flex-wrap:wrap;">
+        <button class="btn-sketch" style="padding:0.3rem 1.2rem;" onclick="filtrarMenu('desayunos')">desayunos</button>
+        <button class="btn-sketch" style="padding:0.3rem 1.2rem;" onclick="filtrarMenu('almuerzos')">almuerzos</button>
+        <button class="btn-sketch" style="padding:0.3rem 1.2rem;" onclick="filtrarMenu('bebidas')">bebidas</button>
+        <button class="btn-sketch" style="padding:0.3rem 1.2rem;" onclick="filtrarMenu('postres')">postres</button>
+        <button class="btn-sketch" style="padding:0.3rem 1.2rem;" onclick="filtrarMenu('todos')">todos</button>
+      </div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria">
+      <h2>🖼️ galería</h2>
+      <div class="gallery-wall" id="galeriaGrid"></div>
+    </section>
+
+    <!-- Reservas -->
+    <section id="reservas" style="margin:3rem 0;">
+      <h2>📝 reserva tu mesa</h2>
+      <div class="notebook-form">
+        <input class="irregular-input" type="text" id="nombre" placeholder="tu nombre...">
+        <input class="irregular-input" type="email" id="email" placeholder="tu correo...">
+        <input class="irregular-input" type="date" id="fecha">
+        <select class="irregular-input" id="personas">
+          <option>1 persona</option>
+          <option>2 personas</option>
+          <option>3 personas</option>
+          <option>4 personas</option>
+          <option>5+ personas</option>
+        </select>
+        <button class="btn-sketch" style="margin-top:1rem;" onclick="confirmarReserva()">confirmar reserva ✨</button>
+      </div>
+      <p class="handwritten" style="margin-top:0.5rem;">~ te enviaremos un dibujo de confirmación</p>
+    </section>
+
+    <!-- Opiniones -->
+    <section>
+      <h2>💬 opiniones</h2>
+      <div class="sticky-notes">
+        <div class="sticky"><span class="handwritten">"El mejor café que he probado, ambiente único."</span><br>— María G.</div>
+        <div class="sticky"><span class="handwritten">"Los desayunos son increíbles, volveré seguro."</span><br>— Carlos R.</div>
+        <div class="sticky"><span class="handwritten">"Un lugar mágico para trabajar y relajarse."</span><br>— Laura M.</div>
+        <div class="sticky"><span class="handwritten">"El cheesecake es el mejor de la ciudad."</span><br>— Ana S.</div>
+      </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section style="margin:3rem 0;">
+      <h2>🗺️ cómo llegar</h2>
+      <div style="background:#e3f0fa; border:2px dashed #2c3e50; padding:1.5rem; border-radius:20px 5px;">
+        <p><strong>📍 Dirección:</strong> Calle de las Artes 42, Barrio Creativo</p>
+        <p><strong>⏰ Horario:</strong> Lun - Dom: 8:00 - 21:00</p>
+        <p><strong>📞 Teléfono:</strong> +34 123 456 789</p>
+        <button class="btn-sketch" style="margin-top:1rem;" onclick="verMapa()">🗺️ Ver en Google Maps</button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-sketch">
+      <div>✏️ redes: 
+        <span style="cursor:pointer" onclick="alert('Instagram: @bluehousecafe')">📘</span> 
+        <span style="cursor:pointer" onclick="alert('Twitter: @bluehousecafe')">🐦</span> 
+        <span style="cursor:pointer" onclick="alert('Instagram: @bluehousecafe')">📷</span>
+      </div>
+      <div class="handwritten">Blue House Café · Desde 2018</div>
+      <div>🖌️ Hecho con ☕ y ✨</div>
+    </footer>
+  </div>
+
+  <!-- Modal para imágenes -->
+  <div id="imageModal" class="modal" onclick="cerrarModal()">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="">
+    </div>
+  </div>
+
+  <script>
+    // Datos del menú
+    const menuData = {
+      desayunos: [
+        { nombre: "Tostadas Francesas", descripcion: "Miel de maple, frutos rojos y nueces", precio: "€8.90", img: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=300&h=200&fit=crop", emoji: "🥞" },
+        { nombre: "Huevos Benedict", descripcion: "Salsa holandesa, jamón y pan artesanal", precio: "€11.90", img: "https://images.unsplash.com/photo-1608039829572-7851f1bf9674?w=300&h=200&fit=crop", emoji: "🍳" },
+        { nombre: "Açaí Bowl", descripcion: "Granola, plátano y frutas del bosque", precio: "€9.50", img: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=300&h=200&fit=crop", emoji: "🥣" }
+      ],
+      almuerzos: [
+        { nombre: "Ensalada Blue", descripcion: "Pera, queso azul, nueces y vinagreta", precio: "€12.90", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=200&fit=crop", emoji: "🥗" },
+        { nombre: "Risotto de Setas", descripcion: "Arroz cremoso, setas silvestres y parmesano", precio: "€14.90", img: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=300&h=200&fit=crop", emoji: "🍚" },
+        { nombre: "Burger Blue House", descripcion: "Carne angus, queso cheddar, cebolla caramelizada", precio: "€13.90", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&h=200&fit=crop", emoji: "🍔" }
+      ],
+      bebidas: [
+        { nombre: "Latte Art", descripcion: "Café de especialidad con arte en leche", precio: "€3.50", img: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=300&h=200&fit=crop", emoji: "☕" },
+        { nombre: "Matcha Latte", descripcion: "Té matcha premium con leche vegetal", precio: "€4.50", img: "https://images.unsplash.com/photo-1534777367038-9404f45b869b?w=300&h=200&fit=crop", emoji: "🍵" },
+        { nombre: "Smoothie Tropical", descripcion: "Mango, piña y jengibre", precio: "€5.90", img: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=300&h=200&fit=crop", emoji: "🥤" }
+      ],
+      postres: [
+        { nombre: "Tarta de Queso", descripcion: "Con coulis de frutos rojos", precio: "€5.90", img: "https://images.unsplash.com/photo-1578985545062-69928b1b958e?w=300&h=200&fit=crop", emoji: "🍰" },
+        { nombre: "Brownie", descripcion: "Con helado de vainilla", precio: "€5.50", img: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&h=200&fit=crop", emoji: "🍫" },
+        { nombre: "Crème Brûlée", descripcion: "Clásico francés", precio: "€6.50", img: "https://images.unsplash.com/photo-1470324161839-ce2bb6fa6bc3?w=300&h=200&fit=crop", emoji: "🍮" }
+      ]
+    };
+
+    // Datos de galería
+    const galeriaData = [
+      { url: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=300&fit=crop", titulo: "Nuestro café" },
+      { url: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop", titulo: "Ambiente acogedor" },
+      { url: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop", titulo: "Espacio creativo" },
+      { url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop", titulo: "Nuestros platos" },
+      { url: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=300&fit=crop", titulo: "Terraza" },
+      { url: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=400&h=300&fit=crop", titulo: "Eventos especiales" }
+    ];
+
+    function cargarMenu(categoria = 'todos') {
+      const menuGrid = document.getElementById('menuGrid');
+      menuGrid.innerHTML = '';
+      
+      let items = [];
+      if (categoria === 'todos') {
+        items = [...menuData.desayunos, ...menuData.almuerzos, ...menuData.bebidas, ...menuData.postres];
+      } else {
+        items = menuData[categoria];
+      }
+      
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'dish-card';
+        card.onclick = () => alert(`${item.nombre}\n${item.descripcion}\n${item.precio}`);
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.nombre}" class="dish-image" onerror="this.src='https://placehold.co/300x200?text=${item.emoji}'">
+          <div class="dish-illustration">${item.emoji}</div>
+          <h3>${item.nombre}</h3>
+          <small>${item.descripcion}</small>
+          <p><strong>${item.precio}</strong></p>
+        `;
+        menuGrid.appendChild(card);
+      });
+    }
+
+    function cargarGaleria() {
+      const galeriaGrid = document.getElementById('galeriaGrid');
+      galeriaGrid.innerHTML = '';
+      
+      galeriaData.forEach(img => {
+        const polaroid = document.createElement('div');
+        polaroid.className = 'polaroid-sketch';
+        polaroid.onclick = () => abrirModal(img.url);
+        polaroid.innerHTML = `
+          <div class="tape">📎</div>
+          <img src="${img.url}" alt="${img.titulo}" class="gallery-image" onerror="this.src='https://placehold.co/400x300?text=📷'">
+          <small>${img.titulo}</small>
+        `;
+        galeriaGrid.appendChild(polaroid);
+      });
+    }
+
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function verMenu() { scrollToSection('menu'); }
+    function abrirReservas() { scrollToSection('reservas'); }
+    function filtrarMenu(categoria) { cargarMenu(categoria); scrollToSection('menu'); }
+
+    function confirmarReserva() {
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const fecha = document.getElementById('fecha').value;
+      const personas = document.getElementById('personas').value;
+      
+      if (!nombre || !email || !fecha) {
+        alert('📝 Por favor, completa todos los campos');
+        return;
+      }
+      
+      alert(`✨ ¡Gracias ${nombre}! Tu reserva para ${personas} el ${fecha} ha sido confirmada.\n📧 Te enviaremos un dibujo de confirmación a ${email}`);
+      document.getElementById('nombre').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('fecha').value = '';
+    }
+
+    function verMapa() { window.open('https://maps.google.com/?q=Calle+de+las+Artes+42', '_blank'); }
+
+    function abrirModal(imgUrl) {
+      document.getElementById('imageModal').style.display = 'flex';
+      document.getElementById('modalImage').src = imgUrl;
+    }
+    function cerrarModal() { document.getElementById('imageModal').style.display = 'none'; }
+
+    function animarNubes() {
+      gsap.to(".clouds", { x: 30, duration: 18, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      gsap.to(".cloud2", { x: -25, duration: 22, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      cargarMenu('todos');
+      cargarGaleria();
+      animarNubes();
+      
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.sketch-card, .dish-card, .polaroid-sketch, .sticky').forEach((el, i) => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+          opacity: 0, y: 40, duration: 0.7, delay: i * 0.1, ease: "back.out(1.2)"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

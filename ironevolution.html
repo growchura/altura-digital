@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IRON EVOLUTION FITNESS | Gimnasio Premium</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- SwiperJS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: none;
+    }
+
+    body {
+      background-color: #0A0A0A;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      color: #FFFFFF;
+    }
+
+    /* Custom Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #FF2D2D;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: 0.1s;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-dot {
+      width: 5px;
+      height: 5px;
+      background: #FF2D2D;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: 0.05s;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Particles Background */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Glassmorphism Navbar */
+    .navbar {
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .navbar.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      padding: 0.5rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(45deg, #FF2D2D, #FFFFFF);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+    }
+    .nav-link {
+      color: #FFFFFF !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #FF2D2D !important;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: #FF2D2D;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 30px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-content h1 {
+      font-size: 5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FF2D2D, #FFFFFF);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      color: #CCCCCC;
+      margin-bottom: 2rem;
+    }
+    .hero-buttons .btn {
+      margin: 0 1rem;
+      padding: 12px 35px;
+      font-weight: 700;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+    .btn-primary-neon {
+      background: linear-gradient(45deg, #FF2D2D, #FF6B6B);
+      border: none;
+      color: white;
+      box-shadow: 0 0 20px rgba(255,45,45,0.5);
+    }
+    .btn-primary-neon:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255,45,45,0.8);
+    }
+    .btn-outline-neon {
+      border: 2px solid #FF2D2D;
+      background: transparent;
+      color: white;
+    }
+    .btn-outline-neon:hover {
+      background: #FF2D2D;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,45,45,0.5);
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #FF2D2D, transparent);
+    }
+
+    /* Service Cards */
+    .service-card {
+      background: rgba(21, 21, 21, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .service-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255,45,45,0.3);
+    }
+    .service-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .service-card:hover img {
+      transform: scale(1.1);
+    }
+    .service-card .service-info {
+      padding: 1.5rem;
+    }
+
+    /* Price Cards 3D */
+    .price-card {
+      background: linear-gradient(135deg, #151515, #0A0A0A);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,45,45,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .price-card:hover::before {
+      opacity: 1;
+    }
+    .price-card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: 0 20px 40px rgba(255,45,45,0.2);
+    }
+    .price-card .price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #FF2D2D;
+    }
+    .price-card .btn {
+      margin-top: 1rem;
+    }
+
+    /* Gallery Masonry */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      aspect-ratio: 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(255,45,45,0.9));
+      padding: 2rem;
+      transition: bottom 0.3s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      bottom: 0;
+    }
+
+    /* Team Cards 3D */
+    .team-card {
+      background: #151515;
+      border-radius: 20px;
+      overflow: hidden;
+      text-align: center;
+      transition: all 0.4s ease;
+      transform-style: preserve-3d;
+    }
+    .team-card:hover {
+      transform: translateY(-10px) rotateY(5deg);
+      box-shadow: 0 20px 40px rgba(255,45,45,0.2);
+    }
+    .team-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    .social-links a {
+      color: #FF2D2D;
+      margin: 0 10px;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      transform: translateY(-3px);
+      color: white;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, #151515, #0A0A0A);
+      padding: 80px 0;
+    }
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #FF2D2D;
+    }
+
+    /* Before After */
+    .before-after-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .before-after-img {
+      width: 100%;
+      display: block;
+    }
+    .slider-bar {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: #FF2D2D;
+      cursor: ew-resize;
+    }
+
+    /* Offer Popup */
+    .offer-popup {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 350px;
+      background: linear-gradient(135deg, #FF2D2D, #FF6B6B);
+      border-radius: 15px;
+      padding: 1.5rem;
+      z-index: 9998;
+      transform: scale(0);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .offer-popup.show {
+      transform: scale(1);
+    }
+
+    /* Footer */
+    footer {
+      background: #0A0A0A;
+      padding: 60px 0 30px;
+      border-top: 1px solid #151515;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2rem; }
+      .section-title { font-size: 2rem; }
+      .hero-buttons .btn { margin: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#">IRON<span style="color:#FF2D2D;">EVOLUTION</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#plans">Planes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section con Three.js -->
+  <section id="home" class="hero">
+    <canvas id="hero-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
+    <div class="hero-content">
+      <h1 id="heroTitle">TRANSFORMA TU CUERPO</h1>
+      <p id="heroSubtitle">Entrena con la mejor tecnología fitness del mercado</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary-neon" onclick="openModal('plan')">COMENZAR AHORA</button>
+        <button class="btn btn-outline-neon" onclick="scrollToSection('gallery')">VER INSTALACIONES</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios Premium -->
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Servicios Premium</h2>
+      <div class="swiper serviceSwiper">
+        <div class="swiper-wrapper" id="servicesSwiper"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planes -->
+  <section id="plans">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Planes Exclusivos</h2>
+      <div class="row g-4" id="plansContainer"></div>
+    </div>
+  </section>
+
+  <!-- Antes y Después -->
+  <section>
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Transformaciones Reales</h2>
+      <div class="before-after-container">
+        <img class="before-after-img" id="beforeImg" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=500&fit=crop" alt="Antes">
+        <div class="slider-bar" id="sliderBar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estadísticas -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row text-center g-4">
+        <div class="col-md-3 col-6"><div class="stat-number" id="stat1">0</div><div>Miembros Activos</div></div>
+        <div class="col-md-3 col-6"><div class="stat-number" id="stat2">0</div><div>Entrenadores Elite</div></div>
+        <div class="col-md-3 col-6"><div class="stat-number" id="stat3">0</div><div>Años de Experiencia</div></div>
+        <div class="col-md-3 col-6"><div class="stat-number" id="stat4">0</div><div>Satisfacción</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculadora Fitness -->
+  <section>
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Calculadora Fitness</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <input type="number" id="weight" class="form-control mb-3" placeholder="Peso (kg)" style="background:#151515; color:white;">
+          <input type="number" id="height" class="form-control mb-3" placeholder="Altura (cm)" style="background:#151515; color:white;">
+          <input type="number" id="age" class="form-control mb-3" placeholder="Edad" style="background:#151515; color:white;">
+          <button class="btn btn-primary-neon w-100" onclick="calculateFitness()">Calcular IMC</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section>
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Lo que dicen nuestros miembros</h2>
+      <div class="swiper testimonialSwiper">
+        <div class="swiper-wrapper" id="testimonialsSwiper"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipo -->
+  <section id="team">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Entrenadores Elite</h2>
+      <div class="row g-4" id="teamContainer"></div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="gallery">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Nuestras Instalaciones</h2>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Tour Virtual -->
+  <section>
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Tour Virtual 3D</h2>
+      <div id="tour-canvas" style="height: 500px; background: #151515; border-radius: 20px;"></div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section style="background: linear-gradient(135deg, #FF2D2D, #151515); text-align: center;">
+    <div class="container">
+      <h2 style="font-size: 3rem;">¿Listo para tu mejor versión?</h2>
+      <button class="btn btn-outline-neon mt-4" onclick="openModal('plan')">Únete hoy</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"><h3>IRON EVOLUTION</h3><p>El gimnasio más avanzado tecnológicamente</p></div>
+        <div class="col-md-4"><h4>Contacto</h4><p><i class="fas fa-map-marker-alt"></i> Av. Fitness 123, CDMX</p><p><i class="fas fa-phone"></i> +52 55 1234 5678</p></div>
+        <div class="col-md-4"><h4>Síguenos</h4><div class="social-links"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Offer Popup -->
+  <div class="offer-popup" id="offerPopup">
+    <h4>🔥 Oferta Especial 🔥</h4>
+    <p>50% de descuento en tu inscripción</p>
+    <button class="btn btn-primary-neon btn-sm" onclick="openModal('plan')">Aprovechar</button>
+    <button class="btn btn-outline-neon btn-sm" onclick="closeOffer()">Cerrar</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+    // Inicialización AOS
+    AOS.init({ duration: 1000, once: true });
+
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      cursorDot.style.left = e.clientX + 'px';
+      cursorDot.style.top = e.clientY + 'px';
+    });
+
+    // Datos
+    const services = [
+      { name:"Musculación", desc:"Área equipada con máquinas de última generación", img:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop" },
+      { name:"Cardio", desc:"Zona cardiovascular con tecnología avanzada", img:"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop" },
+      { name:"Crossfit", desc:"Box profesional para entrenamiento funcional", img:"https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&h=250&fit=crop" },
+      { name:"Entrenamiento Personalizado", desc:"Sesiones 1-on-1 con expertos", img:"https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=250&fit=crop" },
+      { name:"Nutrición Deportiva", desc:"Planes alimenticios personalizados", img:"https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=250&fit=crop" }
+    ];
+
+    const plans = [
+      { name:"Básico", price:"$29", features:["Acceso general", "Horario limitado"], popular:false },
+      { name:"Premium", price:"$49", features:["Acceso total", "Nutrición incluida", "Clases grupales"], popular:true },
+      { name:"Elite", price:"$79", features:["Acceso VIP", "Entrenador personal", "Nutrición premium", "Spa"], popular:false }
+    ];
+
+    // Render Services Swiper
+    const servicesSwiper = document.getElementById('servicesSwiper');
+    services.forEach(s => {
+      servicesSwiper.innerHTML += `<div class="swiper-slide"><div class="service-card"><img src="${s.img}" alt="${s.name}"><div class="service-info"><h4>${s.name}</h4><p>${s.desc}</p><button class="btn btn-outline-neon btn-sm" onclick="openModal('service', '${s.name}')">Más info</button></div></div></div>`;
+    });
+
+    // Render Plans
+    const plansContainer = document.getElementById('plansContainer');
+    plans.forEach(p => {
+      plansContainer.innerHTML += `<div class="col-md-4"><div class="price-card"><h3>${p.name}</h3><div class="price">${p.price}<small>/mes</small></div><ul class="list-unstyled">${p.features.map(f => `<li><i class="fas fa-check" style="color:#FF2D2D"></i> ${f}</li>`).join('')}</ul><button class="btn btn-primary-neon" onclick="openModal('plan')">Elegir plan</button></div></div>`;
+    });
+
+    // Render Team
+    const teamData = [
+      { name:"Carlos Rodríguez", specialty:"Head Coach", exp:"10 años", img:"https://randomuser.me/api/portraits/men/32.jpg" },
+      { name:"Ana Martínez", specialty:"Nutricionista", exp:"8 años", img:"https://randomuser.me/api/portraits/women/44.jpg" },
+      { name:"Miguel Ángel", specialty:"Crossfit Coach", exp:"6 años", img:"https://randomuser.me/api/portraits/men/45.jpg" }
+    ];
+    const teamContainer = document.getElementById('teamContainer');
+    teamData.forEach(t => {
+      teamContainer.innerHTML += `<div class="col-md-4"><div class="team-card"><img src="${t.img}" alt="${t.name}"><div class="p-3"><h4>${t.name}</h4><p>${t.specialty}</p><div class="social-links"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-linkedin"></i></a></div><button class="btn btn-outline-neon btn-sm mt-2" onclick="openModal('trainer', '${t.name}')">Ver perfil</button></div></div></div>`;
+    });
+
+    // Render Gallery
+    const galleryImages = [
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop"
+    ];
+    const galleryGrid = document.getElementById('galleryGrid');
+    galleryImages.forEach(img => {
+      galleryGrid.innerHTML += `<div class="gallery-item" onclick="openLightbox('${img}')"><img src="${img}" alt="Gym"><div class="gallery-overlay"><i class="fas fa-search-plus" style="font-size:2rem"></i></div></div>`;
+    });
+
+    // Swiper inicialization
+    new Swiper('.serviceSwiper', { slidesPerView:1, spaceBetween:30, navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}, pagination:{el:'.swiper-pagination'}, breakpoints:{768:{slidesPerView:2},1024:{slidesPerView:3}}, autoplay:{delay:3000} });
+    new Swiper('.testimonialSwiper', { slidesPerView:1, spaceBetween:30, pagination:{el:'.swiper-pagination'}, autoplay:{delay:4000}, breakpoints:{768:{slidesPerView:2}} });
+
+    // Three.js Hero
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('hero-canvas').appendChild(renderer.domElement);
+    const geometry = new THREE.IcosahedronGeometry(1, 1);
+    const material = new THREE.MeshStandardMaterial({ color: 0xff2d2d, emissive: 0x441111, roughness: 0.3, metalness: 0.7 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+    const light = new THREE.PointLight(0xff2d2d, 1);
+    light.position.set(2, 2, 2);
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040));
+    camera.position.z = 3;
+    function animate() { requestAnimationFrame(animate); cube.rotation.x += 0.005; cube.rotation.y += 0.01; renderer.render(scene, camera); }
+    animate();
+    window.addEventListener('resize', () => { camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    const tl = gsap.timeline();
+    tl.from("#heroTitle", { opacity:0, y:50, duration:1 })
+      .from("#heroSubtitle", { opacity:0, y:30, duration:0.8 }, "-=0.5")
+      .from(".hero-buttons .btn", { opacity:0, scale:0.8, stagger:0.2, duration:0.6 }, "-=0.3");
+
+    // Stats Counter
+    [5234, 42, 15, 98].forEach((val, i) => {
+      gsap.to({ val:0 }, { scrollTrigger:{ trigger:'.stats-section', start:"top 80%" }, val:val, duration:2, onUpdate:function() { document.getElementById(`stat${i+1}`).innerText = i===3 ? this.targets()[0].val.toFixed(0)+'%' : Math.floor(this.targets()[0].val); } });
+    });
+
+    // Functions
+    function openModal(type, name='') {
+      const modalHtml = `<div class="modal fade" id="infoModal"><div class="modal-dialog modal-lg"><div class="modal-content" style="background:#151515; color:white;"><div class="modal-header"><h5>${type==='service'?name:type==='plan'?'Plan Elite':'Perfil Entrenador'}</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>Información detallada y beneficios exclusivos disponibles.</p><button class="btn btn-primary-neon" onclick="alert('Reserva confirmada')">Reservar ahora</button></div></div></div></div>`;
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      new bootstrap.Modal(document.getElementById('infoModal')).show();
+      document.getElementById('infoModal').addEventListener('hidden.bs.modal', () => document.getElementById('infoModal').remove());
+    }
+    function openLightbox(img) { alert(`Lightbox abierto: ${img}`); }
+    function calculateFitness() { const w=document.getElementById('weight').value, h=document.getElementById('height').value/100, imc = (w/(h*h)).toFixed(1); alert(`Tu IMC es ${imc}`); }
+    function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior:'smooth' }); }
+    function closeOffer() { document.getElementById('offerPopup').classList.remove('show'); }
+    setTimeout(() => document.getElementById('offerPopup').classList.add('show'), 3000);
+
+    // Antes/Después
+    let dragging = false;
+    const bar = document.getElementById('sliderBar');
+    const container = document.querySelector('.before-after-container');
+    bar.addEventListener('mousedown', () => dragging = true);
+    window.addEventListener('mouseup', () => dragging = false);
+    window.addEventListener('mousemove', (e) => { if(!dragging) return; const rect = container.getBoundingClientRect(); let x = e.clientX - rect.left; x = Math.min(Math.max(x, 0), rect.width); bar.style.left = `${x}px`; });
+  </script>
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Legacy Barber Studio | Barbería Premium</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- SwiperJS CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #111111;
+      color: #F5E6C8;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .logo, .section-title {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C9A227;
+      border-radius: 4px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(17, 17, 17, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+    }
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      background: rgba(17, 17, 17, 0.98);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #C9A227 !important;
+      letter-spacing: 2px;
+    }
+    .navbar-brand span {
+      color: #F5E6C8;
+    }
+    .nav-link {
+      color: #F5E6C8 !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #C9A227 !important;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: #C9A227;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 30px;
+    }
+    .favorite-count {
+      background: #C9A227;
+      color: #111111;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 5px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1920&h=1080&fit=crop') center/cover fixed;
+    }
+    .hero-content h1 {
+      font-size: 5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+    }
+    .hero-buttons .btn {
+      margin: 0 1rem;
+      padding: 12px 35px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-primary-custom {
+      background: #C9A227;
+      border: none;
+      color: #111111;
+    }
+    .btn-primary-custom:hover {
+      background: #D4B33A;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(201,162,39,0.3);
+    }
+    .btn-outline-custom {
+      border: 2px solid #C9A227;
+      background: transparent;
+      color: #F5E6C8;
+    }
+    .btn-outline-custom:hover {
+      background: #C9A227;
+      color: #111111;
+      transform: translateY(-3px);
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 0;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: #C9A227;
+    }
+
+    /* Service Cards */
+    .service-card {
+      background: #1a1a1a;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(201,162,39,0.2);
+    }
+    .service-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .service-card .service-info {
+      padding: 1.5rem;
+    }
+    .service-card h4 {
+      margin-bottom: 0.5rem;
+    }
+    .service-card .price {
+      color: #C9A227;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .favorite-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0,0,0,0.6);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .favorite-btn i {
+      font-size: 1.2rem;
+      color: #F5E6C8;
+    }
+    .favorite-btn.active i {
+      color: #ff4757;
+    }
+
+    /* Team Cards */
+    .team-card {
+      background: #1a1a1a;
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-10px);
+    }
+    .team-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+    }
+    .team-card .team-info {
+      padding: 1.5rem;
+    }
+    .team-card h4 {
+      color: #C9A227;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Gallery Masonry */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      aspect-ratio: 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 2rem;
+      transition: bottom 0.3s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      bottom: 0;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+      padding: 80px 0;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #C9A227;
+      font-family: 'Playfair Display', serif;
+    }
+    .stat-label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Before After Slider */
+    .before-after-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .before-after-img {
+      width: 100%;
+      display: block;
+    }
+    .after-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .slider-bar {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: #C9A227;
+      cursor: ew-resize;
+      transform: translateX(-50%);
+    }
+
+    /* FAQ Accordion */
+    .accordion-item {
+      background: #1a1a1a;
+      border: 1px solid #2B2B2B;
+    }
+    .accordion-button {
+      background: #1a1a1a;
+      color: #F5E6C8;
+      font-weight: 600;
+    }
+    .accordion-button:not(.collapsed) {
+      background: #2B2B2B;
+      color: #C9A227;
+    }
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: #C9A227;
+    }
+
+    /* Footer */
+    footer {
+      background: #0a0a0a;
+      padding: 60px 0 30px;
+      border-top: 1px solid #2B2B2B;
+    }
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #2B2B2B;
+      border-radius: 50%;
+      margin: 0 5px;
+      transition: all 0.3s ease;
+    }
+    .social-icons a:hover {
+      background: #C9A227;
+      transform: translateY(-3px);
+    }
+    .social-icons a i {
+      color: #F5E6C8;
+      font-size: 1.2rem;
+    }
+
+    /* Toast */
+    .toast-custom {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+      .hero-buttons .btn { margin: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#">LEGACY<span>BARBER</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto" id="navMenu">
+          <li class="nav-item"><a class="nav-link" href="#home">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+        </ul>
+        <div class="ms-3">
+          <i class="bi bi-heart-fill" style="color: #C9A227;"></i>
+          <span id="favoriteCounter" class="favorite-count">0</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 id="heroTitle">LEGACY BARBER STUDIO</h1>
+      <p id="heroSubtitle">DONDE LA TRADICIÓN ENCUENTRA EL ESTILO MODERNO</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary-custom" onclick="openBookingModal()">RESERVAR AHORA</button>
+        <button class="btn btn-outline-custom" onclick="scrollToSection('services')">VER SERVICIOS</button>
+      </div>
+    </div>
+    <div class="scroll-indicator" onclick="scrollToSection('services')">
+      <i class="bi bi-chevron-double-down" style="font-size: 2rem; color: #C9A227;"></i>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="row g-4" id="servicesContainer"></div>
+    </div>
+  </section>
+
+  <!-- Carrusel de Estilos (Swiper) -->
+  <section id="styles">
+    <div class="container">
+      <h2 class="section-title">Estilos de Corte</h2>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper" id="stylesSwiper"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team">
+    <div class="container">
+      <h2 class="section-title">Nuestro Equipo</h2>
+      <div class="row g-4" id="teamContainer"></div>
+    </div>
+  </section>
+
+  <!-- Antes y Después -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Antes & Después</h2>
+      <div class="before-after-container" id="beforeAfter">
+        <img class="before-after-img" id="beforeImg" src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&h=500&fit=crop" alt="Antes">
+        <div class="slider-bar" id="sliderBar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estadísticas -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row text-center g-4">
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number" id="stat1">0</div>
+            <div class="stat-label">Clientes Felices</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number" id="stat2">0</div>
+            <div class="stat-label">Cortes Realizados</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number" id="stat3">0</div>
+            <div class="stat-label">Calificación Promedio</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number" id="stat4">0</div>
+            <div class="stat-label">Años de Experiencia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section id="testimonials">
+    <div class="container">
+      <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+      <div class="swiper testimonialSwiper">
+        <div class="swiper-wrapper" id="testimonialsContainer"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Preguntas Frecuentes</h2>
+      <div class="accordion" id="faqAccordion"></div>
+    </div>
+  </section>
+
+  <!-- Comparador de Servicios -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Comparar Servicios</h2>
+      <div class="row">
+        <div class="col-md-5">
+          <select class="form-select" id="compareService1" style="background:#1a1a1a; color:#F5E6C8; border-color:#C9A227;">
+            <option value="">Seleccionar servicio</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-center">
+          <span class="fs-3">VS</span>
+        </div>
+        <div class="col-md-5">
+          <select class="form-select" id="compareService2" style="background:#1a1a1a; color:#F5E6C8; border-color:#C9A227;">
+            <option value="">Seleccionar servicio</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-4" id="comparisonTable"></div>
+    </div>
+  </section>
+
+  <!-- Galería Premium -->
+  <section id="gallery">
+    <div class="container">
+      <h2 class="section-title">Galería</h2>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="section-title" style="text-align:left;">Contacto</h2>
+          <form id="contactForm">
+            <input type="text" class="form-control mb-3" id="contactName" placeholder="Nombre" style="background:#1a1a1a; border-color:#2B2B2B; color:#F5E6C8;">
+            <input type="email" class="form-control mb-3" id="contactEmail" placeholder="Correo" style="background:#1a1a1a; border-color:#2B2B2B; color:#F5E6C8;">
+            <textarea class="form-control mb-3" id="contactMessage" rows="5" placeholder="Mensaje" style="background:#1a1a1a; border-color:#2B2B2B; color:#F5E6C8;"></textarea>
+            <button type="submit" class="btn btn-primary-custom">Enviar Mensaje</button>
+          </form>
+        </div>
+        <div class="col-lg-6">
+          <h3 class="mb-3">Horario</h3>
+          <p>Lunes - Viernes: 9:00 - 20:00</p>
+          <p>Sábado: 10:00 - 18:00</p>
+          <p>Domingo: Cerrado</p>
+          <h3 class="mt-4">Dirección</h3>
+          <p>Calle de la Barbería 123, Ciudad</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h3>LEGACY BARBER</h3>
+          <p>Estilo y tradición desde 2014</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Síguenos</h4>
+          <div class="social-icons">
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-twitter"></i></a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h4>Enlaces Rápidos</h4>
+          <ul class="list-unstyled">
+            <li><a href="#home" style="color:#F5E6C8;">Inicio</a></li>
+            <li><a href="#services" style="color:#F5E6C8;">Servicios</a></li>
+            <li><a href="#contact" style="color:#F5E6C8;">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border-color:#2B2B2B;">
+      <div class="text-center">
+        <p>&copy; 2024 Legacy Barber Studio. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SwiperJS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+  <script>
+    // Datos
+    const services = [
+      { id:1, name:"Corte Clásico", price:"$25", duration:"30min", benefits:"Tijera y navaja", popularity:"⭐⭐⭐⭐⭐", desc:"Corte tradicional con técnicas clásicas", img:"https://images.unsplash.com/photo-1585747860714-2ba729b1f370?w=400&h=250&fit=crop" },
+      { id:2, name:"Fade Premium", price:"$35", duration:"45min", benefits:"Degradado perfecto", popularity:"⭐⭐⭐⭐⭐", desc:"Fade moderno con acabado premium", img:"https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&h=250&fit=crop" },
+      { id:3, name:"Arreglo de Barba", price:"$20", duration:"25min", benefits:"Perfilado con navaja", popularity:"⭐⭐⭐⭐", desc:"Diseño y perfilado de barba", img:"https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&h=250&fit=crop" },
+      { id:4, name:"Corte + Barba", price:"$50", duration:"60min", benefits:"Pack completo", popularity:"⭐⭐⭐⭐⭐", desc:"Combo completo de grooming", img:"https://images.unsplash.com/photo-1503951914875-3c4d8eaa8237?w=400&h=250&fit=crop" }
+    ];
+    
+    const team = [
+      { name:"Carlos Martínez", specialty:"Master Barber", exp:"10 años", img:"https://randomuser.me/api/portraits/men/1.jpg", bio:"Especialista en cortes clásicos" },
+      { name:"Javier López", specialty:"Fade Specialist", exp:"8 años", img:"https://randomuser.me/api/portraits/men/2.jpg", bio:"Rey del degradado" }
+    ];
+    
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    
+    function updateFavCounter() {
+      document.getElementById('favoriteCounter').innerText = favorites.length;
+    }
+    
+    function toggleFavorite(id) {
+      if(favorites.includes(id)) favorites = favorites.filter(f => f !== id);
+      else favorites.push(id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      updateFavCounter();
+      renderServices();
+    }
+    
+    function renderServices() {
+      const container = document.getElementById('servicesContainer');
+      container.innerHTML = services.map(s => `
+        <div class="col-md-3">
+          <div class="service-card">
+            <img src="${s.img}" alt="${s.name}">
+            <button class="favorite-btn ${favorites.includes(s.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${s.id})">
+              <i class="bi bi-heart${favorites.includes(s.id) ? '-fill' : ''}"></i>
+            </button>
+            <div class="service-info">
+              <h4>${s.name}</h4>
+              <p>${s.desc}</p>
+              <p class="price">${s.price}</p>
+              <button class="btn btn-outline-custom btn-sm" onclick="openServiceModal(${s.id})">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    function openServiceModal(id) {
+      const s = services.find(s => s.id === id);
+      const modalHtml = `
+        <div class="modal fade" id="serviceModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content" style="background:#1a1a1a; color:#F5E6C8;">
+              <div class="modal-header">
+                <h5 class="modal-title">${s.name}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <p><strong>Precio:</strong> ${s.price}</p>
+                <p><strong>Duración:</strong> ${s.duration}</p>
+                <p><strong>Beneficios:</strong> ${s.benefits}</p>
+                <p><strong>Popularidad:</strong> ${s.popularity}</p>
+                <button class="btn btn-primary-custom" onclick="openBookingModal()">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      const modal = new bootstrap.Modal(document.getElementById('serviceModal'));
+      modal.show();
+      document.getElementById('serviceModal').addEventListener('hidden.bs.modal', () => {
+        document.getElementById('serviceModal').remove();
+      });
+    }
+    
+    function openBookingModal() {
+      const modalHtml = `
+        <div class="modal fade" id="bookingModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content" style="background:#1a1a1a; color:#F5E6C8;">
+              <div class="modal-header">
+                <h5 class="modal-title">Reservar Cita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <input type="text" id="bookingName" class="form-control mb-2" placeholder="Nombre" style="background:#2B2B2B; color:#F5E6C8;">
+                <input type="tel" id="bookingPhone" class="form-control mb-2" placeholder="Teléfono" style="background:#2B2B2B; color:#F5E6C8;">
+                <select id="bookingService" class="form-control mb-2" style="background:#2B2B2B; color:#F5E6C8;">
+                  ${services.map(s => `<option>${s.name} - ${s.price}</option>`).join('')}
+                </select>
+                <input type="date" id="bookingDate" class="form-control mb-2" style="background:#2B2B2B; color:#F5E6C8;">
+                <input type="time" id="bookingTime" class="form-control mb-2" style="background:#2B2B2B; color:#F5E6C8;">
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary-custom" onclick="confirmBooking()">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      new bootstrap.Modal(document.getElementById('bookingModal')).show();
+    }
+    
+    function confirmBooking() {
+      const name = document.getElementById('bookingName')?.value;
+      if(!name) { alert('Complete su nombre'); return; }
+      alert(`Reserva confirmada para ${name}`);
+      bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
+      showToast();
+    }
+    
+    function showToast() {
+      const toastHtml = `<div class="toast-custom toast align-items-center text-bg-success border-0" role="alert"><div class="d-flex"><div class="toast-body">Reserva registrada correctamente</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div></div>`;
+      document.body.insertAdjacentHTML('beforeend', toastHtml);
+      const toast = new bootstrap.Toast(document.querySelector('.toast'));
+      toast.show();
+      setTimeout(() => document.querySelector('.toast-custom')?.remove(), 3000);
+    }
+    
+    function scrollToSection(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+      renderServices();
+      updateFavCounter();
+      
+      // Hero Animations
+      const tl = gsap.timeline();
+      tl.from("#heroTitle", { opacity: 0, y: 50, duration: 1 })
+        .from("#heroSubtitle", { opacity: 0, y: 30, duration: 0.8 }, "-=0.5")
+        .from(".hero-buttons .btn", { opacity: 0, scale: 0.8, stagger: 0.2, duration: 0.6 }, "-=0.3");
+      
+      // ScrollTrigger
+      gsap.utils.toArray('.service-card, .team-card, .gallery-item').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 80%" },
+          opacity: 0, y: 50, duration: 0.6
+        });
+      });
+      
+      // Stats Counter
+      const stats = [5200, 12800, 4.9, 10];
+      [5200, 12800, 4.9, 10].forEach((val, i) => {
+        gsap.to({ val: 0 }, {
+          scrollTrigger: { trigger: '.stats-section', start: "top 80%" },
+          val: val, duration: 2, onUpdate: function() {
+            document.getElementById(`stat${i+1}`).innerText = i === 2 ? this.targets()[0].val.toFixed(1) : Math.floor(this.targets()[0].val);
+          }
+        });
+      });
+      
+      // Swiper
+      new Swiper('.mySwiper', {
+        slidesPerView: 1, spaceBetween: 30, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        pagination: { el: '.swiper-pagination' }, breakpoints: { 768: { slidesPerView: 3 } }, autoplay: { delay: 3000 }
+      });
+      
+      // Antes/Después
+      let isDragging = false;
+      const bar = document.getElementById('sliderBar');
+      const container = document.querySelector('.before-after-container');
+      bar.addEventListener('mousedown', () => isDragging = true);
+      window.addEventListener('mouseup', () => isDragging = false);
+      window.addEventListener('mousemove', (e) => {
+        if(!isDragging) return;
+        const rect = container.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        x = Math.min(Math.max(x, 0), rect.width);
+        bar.style.left = `${x}px`;
+      });
+      
+      // Contact Form
+      document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Mensaje enviado correctamente');
+        e.target.reset();
+      });
+    });
+  </script>
+</body>
+</html>
